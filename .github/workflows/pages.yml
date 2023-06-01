@@ -1,0 +1,43 @@
+name: Pages
+
+on:
+  push:
+    branches:
+      - main # default branch
+      
+env:
+  GIT_USER: prs1022
+  GIT_EMAIL: prs1022@126.com
+  THEME_REPO: prs1022/hexo-theme-concise
+  THEME_BRANCH: master
+  DEPLOY_REPO: prs1022/prs1022.github.io
+  DEPLOY_BRANCH: master
+
+jobs:
+  pages:
+    name: Build on node ${{matrix.node_version}} and ${{matrix.os}}
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js 18.x
+        uses: actions/setup-node@v2
+        with:
+          node-version: "18"
+      - name: Cache NPM dependencies
+        uses: actions/cache@v2
+        with:
+          path: node_modules
+          key: ${{ runner.OS }}-npm-cache
+          restore-keys: |
+            ${{ runner.OS }}-npm-cache
+      - name: Install Dependencies
+        run: npm install
+      - name: Build
+        run: npm run build
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./public
