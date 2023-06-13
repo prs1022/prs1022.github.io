@@ -105,3 +105,8 @@ deploy:
   type: git
   repo: https://github.com/prs1022/prs1022.github.io
   branch: gh-pages
+
+# MathJax 数学公式支持
+mathjax:
+    on: true # 是否启用
+    per_page: false # 若只渲染单个页面，此选项设为false 页面内加入 mathjax: true
