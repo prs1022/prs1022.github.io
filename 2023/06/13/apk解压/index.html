@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"prs1022.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.17.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"utterances","storage":true,"lazyload":false,"nav":null,"activeClass":"utterances"},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="apk解压工具apktool缘起看了一篇文章，让人去修改“有道云”的笔记背景、去广告、使用vip才能用的颜色等，还有这好事？那再也不用开会员了，虽然我也没开过。 于是按照他的说法找到有道云本地的安装目录，好家伙，已经不是当初的版本了，一看文章2020年写的，现在都是apk压缩文件了。 既然是压缩文件，肯定得 解压 后修改啊。 于是试了下自带的解压不行，于是找到了apktool这个工具，果然专业。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="apk解压">
+<meta property="og:url" content="https://prs1022.github.io/2023/06/13/apk%E8%A7%A3%E5%8E%8B/index.html">
+<meta property="og:site_name" content="song&#39;s blog">
+<meta property="og:description" content="apk解压工具apktool缘起看了一篇文章，让人去修改“有道云”的笔记背景、去广告、使用vip才能用的颜色等，还有这好事？那再也不用开会员了，虽然我也没开过。 于是按照他的说法找到有道云本地的安装目录，好家伙，已经不是当初的版本了，一看文章2020年写的，现在都是apk压缩文件了。 既然是压缩文件，肯定得 解压 后修改啊。 于是试了下自带的解压不行，于是找到了apktool这个工具，果然专业。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://prs1022.github.io/imgs/2.png">
+<meta property="og:image" content="https://prs1022.github.io/imgs/3.png">
+<meta property="og:image" content="https://prs1022.github.io/imgs/4.png">
+<meta property="article:published_time" content="2023-06-13T07:24:32.000Z">
+<meta property="article:modified_time" content="2023-06-13T08:29:49.261Z">
+<meta property="article:author" content="songrenpu">
+<meta property="article:tag" content="解压">
+<meta property="article:tag" content="apk">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://prs1022.github.io/imgs/2.png">
+
+
+<link rel="canonical" href="https://prs1022.github.io/2023/06/13/apk%E8%A7%A3%E5%8E%8B/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://prs1022.github.io/2023/06/13/apk%E8%A7%A3%E5%8E%8B/","path":"2023/06/13/apk解压/","title":"apk解压"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>apk解压 | song's blog</title>
+  
+
+  <script src="/js/third-party/analytics/baidu-analytics.js"></script>
+  <script async src="https://hm.baidu.com/hm.js?62271930103b38173f1184b34224f6e0"></script>
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">song's blog</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#apk%E8%A7%A3%E5%8E%8B%E5%B7%A5%E5%85%B7apktool"><span class="nav-number">1.</span> <span class="nav-text">apk解压工具apktool</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BC%98%E8%B5%B7"><span class="nav-number">1.1.</span> <span class="nav-text">缘起</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BC%80%E6%90%9E"><span class="nav-number">1.2.</span> <span class="nav-text">开搞</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">songrenpu</p>
+  <div class="site-description" itemprop="description">个人博客，记录学习点滴，生活点滴，欢迎交流</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">7</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/prs1022" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;prs1022" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:prs1022@126.com" title="E-Mail → mailto:prs1022@126.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://prs1022.github.io/2023/06/13/apk%E8%A7%A3%E5%8E%8B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="songrenpu">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="song's blog">
+      <meta itemprop="description" content="个人博客，记录学习点滴，生活点滴，欢迎交流">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="apk解压 | song's blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          apk解压
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2023-06-13 15:24:32 / 修改时间：16:29:49" itemprop="dateCreated datePublished" datetime="2023-06-13T15:24:32+08:00">2023-06-13</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/tool/" itemprop="url" rel="index"><span itemprop="name">tool</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id="apk解压工具apktool"><a href="#apk解压工具apktool" class="headerlink" title="apk解压工具apktool"></a>apk解压工具apktool</h1><h2 id="缘起"><a href="#缘起" class="headerlink" title="缘起"></a>缘起</h2><p>看了一篇文章，让人去修改“有道云”的笔记背景、去广告、使用vip才能用的颜色等，还有这好事？那再也不用开会员了，虽然我也没开过。</p>
+<p>于是按照他的说法找到有道云本地的安装目录，好家伙，已经不是当初的版本了，一看文章2020年写的，现在都是apk压缩文件了。</p>
+<p>既然是压缩文件，肯定得 <strong>解压</strong> 后修改啊。</p>
+<p>于是试了下自带的解压不行，于是找到了apktool这个工具，果然专业。</p>
+<p>一看下载我就有点头疼，这tm的是要引用这么多依赖，没个一小时很难下载完，咱就是说果然专业。</p>
+<p><img src="/../imgs/2.png"></p>
+<h2 id="开搞"><a href="#开搞" class="headerlink" title="开搞"></a>开搞</h2><p>下载完后我们找到我们的作案现场，准备施展一番拳脚。</p>
+<p>mac的安装地址是在<br><img src="/../imgs/3.png"></p>
+<p>好家伙，藏的挺深啊。</p>
+<p>ok，我们那开始对它动刑解剖：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">apktool d[ecode] [options] &lt;file_apk&gt;</span><br><span class="line"> -f,--force              Force delete destination directory.</span><br><span class="line"> -o,--output &lt;dir&gt;       The name of folder that gets written. Default is apk.out</span><br><span class="line"> -p,--frame-path &lt;dir&gt;   Uses framework files located in &lt;dir&gt;.</span><br><span class="line"> -r,--no-res             Do not decode resources.</span><br><span class="line"> -s,--no-src             Do not decode sources.</span><br><span class="line"> -t,--frame-tag &lt;tag&gt;    Uses framework files tagged by &lt;tag&gt;.</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>寄了，一顿操作猛如虎，输入就是一通堆栈报错<br><img src="/../imgs/4.png"></p>
+<p>下次找个合适的apk解压再更新吧，google了也不知道这是啥问题</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E8%A7%A3%E5%8E%8B/" rel="tag"># 解压</a>
+              <a href="/tags/apk/" rel="tag"># apk</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2023/06/13/hello-world/" rel="prev" title="Hello World">
+                  <i class="fa fa-chevron-left"></i> Hello World
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2023/06/13/%E5%9B%9E%E6%BA%AF%E7%AE%97%E6%B3%95%E7%BB%83%E4%B9%A0/" rel="next" title="回溯算法练习">
+                  回溯算法练习 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments utterances-container"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">prs1022 版权所有</span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+<script class="next-config" data-name="utterances" type="application/json">{"enable":true,"repo":"prs1022/prs1022.github.io","issue_term":"pathname","theme":"github-light"}</script>
+<script src="/js/third-party/comments/utterances.js"></script>
+
+</body>
+</html>
