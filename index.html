@@ -190,9 +190,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2023-06-13 16:30:23 / 修改时间：16:30:35" itemprop="dateCreated datePublished" datetime="2023-06-13T16:30:23+08:00">2023-06-13</time>
+      <time title="创建时间：2023-06-13 16:30:23" itemprop="dateCreated datePublished" datetime="2023-06-13T16:30:23+08:00">2023-06-13</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-06-27 14:43:42" itemprop="dateModified" datetime="2023-06-27T14:43:42+08:00">2023-06-27</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -214,7 +220,93 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          
+          <!-- @import "[TOC]" {cmd="toc" depthFrom=1 depthTo=6 orderedList=false} -->
+<!-- code_chunk_output -->
+<ul>
+<li><a href="#%E5%9B%9E%E6%BA%AF%E6%9C%AC%E8%B4%A8">回溯本质</a>
+<ul>
+<li><a href="#%E8%A7%A3%E5%86%B3%E8%BF%87%E7%A8%8B">解决过程</a></li>
+<li><a href="#%E8%A7%A3%E5%86%B3%E6%A8%A1%E7%89%88">解决模版</a></li>
+</ul>
+</li>
+<li><a href="#%E5%8A%9B%E6%89%A3%E5%AE%9E%E6%88%98">力扣实战</a>
+<ul>
+<li><a href="#%E7%83%B9%E9%A5%AA%E6%96%99%E7%90%86">烹饪料理</a></li>
+</ul>
+</li>
+</ul>
+<!-- /code_chunk_output -->
+<h1>回溯本质</h1>
+<p><strong>回溯算法本质上是一种递归算法</strong></p>
+<p>一般用以解决下面的问题：</p>
+<ul>
+<li>组合问题：从n个数里按照某个规则找出k个数；</li>
+<li>切割问题：一个字符串按照一定的方法有几种切割方法；</li>
+<li>子集问题：n个数里有多少符合条件的子集；</li>
+<li>排列问题：n个数按照某种排列规则，有几种排列方法；</li>
+<li>棋盘问题：n皇后等等；</li>
+</ul>
+<h2 id="解决过程">解决过程</h2>
+<p>回溯的问题都能使用树形结构来解决，就是在树形结构中进行递归查找，即：集合的大小构成了树的宽度，递归的深度就是树的深度。</p>
+<p>递归一定是要有终止条件，所以回溯问题构成的树，一定是一个有限深度的树。</p>
+<h2 id="解决模版">解决模版</h2>
+<p>回溯问题的解决模版：(<strong>回溯三部曲</strong>）</p>
+<ol>
+<li>确定回溯函数的返回值及参数；</li>
+<li>回溯函数的终止条件；</li>
+<li>回溯搜索的遍历过程；</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">void backtracking(参数) &#123;</span><br><span class="line">    if (终止条件) &#123;</span><br><span class="line">        存放结果;</span><br><span class="line">        return;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    for (选择：本层集合中元素（树中节点孩子的数量就是集合的大小）) &#123;</span><br><span class="line">        处理节点;</span><br><span class="line">        backtracking(路径，选择列表); // 递归</span><br><span class="line">        回溯，撤销处理结果</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h1>力扣实战</h1>
+<h2 id="烹饪料理">烹饪料理</h2>
+<pre><code>欢迎各位勇者来到力扣城，城内设有烹饪锅供勇者制作料理，为自己恢 复状态。
+勇者背包内共有编号为 0 ~ 4 的五种食材，其中 materials[j] 表示第 j 种食材的数量。通过这些食材可以制作若干料理，cookbooks[i][j] 表示制作第 i 种料理需要第 j 种食材的数量，而 attribute[i] = [x,y] 表示第 i 道料理的美味度 x 和饱腹感 y。
+在饱腹感不小于 limit 的情况下，请返回勇者可获得的最大美味度。如果无法满足饱腹感要求，则返回 -1。
+注意：
+每种料理只能制作一次。
+
+示例 1：
+
+输入：materials = [3,2,4,1,2]
+cookbooks = [[1,1,0,1,2],[2,1,4,0,0],[3,2,4,1,0]]
+attribute = [[3,2],[2,4],[7,6]]
+limit = 5
+
+输出：7
+
+解释：
+食材数量可以满足以下两种方案：
+方案一：制作料理 0 和料理 1，可获得饱腹感 2+4、美味度 3+2
+方案二：仅制作料理 2， 可饱腹感为 6、美味度为 7
+因此在满足饱腹感的要求下，可获得最高美味度 7
+</code></pre>
+<p>题目有点长，虽然题目整体难度不大，但还是有些注意点，我犯错了调试半天才发现。<br>
+结合前面的三部曲，</p>
+<ol>
+<li>确定回溯函数的返回值及参数；</li>
+<li>回溯函数的终止条件；</li>
+<li>回溯搜索的遍历过程；</li>
+</ol>
+<p>很快啊，我们就能确定返回值是一个 bestYummy(最大美味度 ，int数值)，随着递归深入，不断更新这个 值。</p>
+<p>ok， 参数的话我们把题目里的条件都用上，多传递是没啥问题的，后面再优化嘛。</p>
+<p>除了函数里已经给的 参数，我们需要传递 <strong>yummy(累计美味度, int类型)</strong> , <strong>当前料理的id</strong></p>
+<p>ok 三部曲 <strong>第一部</strong> 完成</p>
+<p>遇到id 为 n(总料理数，cookbooks.length) 结束循环， limit被用完更新最大值<br>
+ok 三部曲 <strong>第二部</strong> 完成</p>
+<p>遍历过程比较重要，想象一下我们的树形结构，每层的决策都是一个二分，就是做或不做，to do or not to do 这个料理，ok， 我们就用两行递归代码搞定。<br>
+第一行递归是 not to do，为啥不是 to do，好问题～<br>
+第二行是to do，搞定这个to do前 需要去把相关的值做个更新，用于递归参数传递。</p>
+<p>ok 至此 三部曲 <strong>第三部</strong> 完成</p>
+<p>需要注意的点是，(<em>敲黑板</em>)</p>
+<ol>
+<li>
+<p><strong>第二部曲</strong> 中， 结束循环 和 更新最大值的代码先后顺序！ 先更新再结束循环，否则最后一个料理如果是最优解的话就会错过～。～</p>
+</li>
+<li>
+<p><strong>第三部曲</strong> 中  递归传递的值发生更新的有 materials， yummy， id， limit， 需要注意的是materials的更新，它是一个数组，需要拷贝一份做修改，将修改的拷贝传入参数</p>
+</li>
+</ol>
+
       
     </div>
 
@@ -292,19 +384,23 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h1 id="apk解压工具apktool"><a href="#apk解压工具apktool" class="headerlink" title="apk解压工具apktool"></a>apk解压工具apktool</h1><h2 id="缘起"><a href="#缘起" class="headerlink" title="缘起"></a>缘起</h2><p>看了一篇文章，让人去修改“有道云”的笔记背景、去广告、使用vip才能用的颜色等，还有这好事？那再也不用开会员了，虽然我也没开过。</p>
+          <h1>apk解压工具apktool</h1>
+<h2 id="缘起">缘起</h2>
+<p>看了一篇文章，让人去修改“有道云”的笔记背景、去广告、使用vip才能用的颜色等，还有这好事？那再也不用开会员了，虽然我也没开过。</p>
 <p>于是按照他的说法找到有道云本地的安装目录，好家伙，已经不是当初的版本了，一看文章2020年写的，现在都是apk压缩文件了。</p>
 <p>既然是压缩文件，肯定得 <strong>解压</strong> 后修改啊。</p>
 <p>于是试了下自带的解压不行，于是找到了apktool这个工具，果然专业。</p>
 <p>一看下载我就有点头疼，这tm的是要引用这么多依赖，没个一小时很难下载完，咱就是说果然专业。</p>
-<p><img src="/../imgs/2.png"></p>
-<h2 id="开搞"><a href="#开搞" class="headerlink" title="开搞"></a>开搞</h2><p>下载完后我们找到我们的作案现场，准备施展一番拳脚。</p>
-<p>mac的安装地址是在<br><img src="/../imgs/3.png"></p>
+<p><img src="../imgs/2.png" alt=""></p>
+<h2 id="开搞">开搞</h2>
+<p>下载完后我们找到我们的作案现场，准备施展一番拳脚。</p>
+<p>mac的安装地址是在<br>
+<img src="../imgs/3.png" alt=""></p>
 <p>好家伙，藏的挺深啊。</p>
 <p>ok，我们那开始对它动刑解剖：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">apktool d[ecode] [options] &lt;file_apk&gt;</span><br><span class="line"> -f,--force              Force delete destination directory.</span><br><span class="line"> -o,--output &lt;dir&gt;       The name of folder that gets written. Default is apk.out</span><br><span class="line"> -p,--frame-path &lt;dir&gt;   Uses framework files located in &lt;dir&gt;.</span><br><span class="line"> -r,--no-res             Do not decode resources.</span><br><span class="line"> -s,--no-src             Do not decode sources.</span><br><span class="line"> -t,--frame-tag &lt;tag&gt;    Uses framework files tagged by &lt;tag&gt;.</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>寄了，一顿操作猛如虎，输入就是一通堆栈报错<br><img src="/../imgs/4.png"></p>
+<p>寄了，一顿操作猛如虎，输入就是一通堆栈报错<br>
+<img src="../imgs/4.png" alt=""></p>
 <p>下次找个合适的apk解压再更新吧，google了也不知道这是啥问题</p>
 
       
@@ -383,25 +479,27 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.<br>更多主题可以在 <a target="_blank" rel="noopener" href="https://hexo.io/themes/">hexo主题</a>中找到，个人喜欢简洁风格，所以当前博客主题用的是<a target="_blank" rel="noopener" href="https://theme-next.js.org/">next</a>,修改主题的方法我放在下面了。</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
+          <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.<br>
+更多主题可以在 <a target="_blank" rel="noopener" href="https://hexo.io/themes/">hexo主题</a>中找到，个人喜欢简洁风格，所以当前博客主题用的是<a target="_blank" rel="noopener" href="https://theme-next.js.org/">next</a>,修改主题的方法我放在下面了。</p>
+<h2 id="Quick-Start">Quick Start</h2>
+<h3 id="Create-a-new-post">Create a new post</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
 <p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="修改主题"><a href="#修改主题" class="headerlink" title="修改主题"></a>修改主题</h3><p>找到对应主题的github地址</p>
+<h3 id="修改主题">修改主题</h3>
+<p>找到对应主题的github地址</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/next-theme/hexo-theme-next themes/next</span><br></pre></td></tr></table></figure>
 <p>执行后next主题会放在themes目录下；</p>
 <p>打开 Hexo配置文件_config.yml 修改 theme变量为 next</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">theme: next</span><br></pre></td></tr></table></figure>
-
 <p>一般主题一个月会更新一次，所以想要体验最新主题，可以cd 到next目录下，git pull即可。</p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
+<h3 id="Run-server">Run server</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
 <p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
+<h3 id="Generate-static-files">Generate static files</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
 <p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
+<h3 id="Deploy-to-remote-sites">Deploy to remote sites</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
 <p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
 
       
@@ -481,8 +579,13 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h1 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h1><h2 id="不定积分"><a href="#不定积分" class="headerlink" title="不定积分"></a>不定积分</h2><p><strong>有没有什么好的推理方法可以记忆三角函数的不定积分公式啊！！！</strong><br>不喜欢死记硬背～～</p>
-<p>$$<br>     \sum_{i&#x3D;0}^n i^2 &#x3D; \frac{(n^2+n)(2n+1)}{6}<br>$$</p>
+          <h1>函数</h1>
+<h2 id="不定积分">不定积分</h2>
+<p><strong>有没有什么好的推理方法可以记忆三角函数的不定积分公式啊！！！</strong><br>
+不喜欢死记硬背～～</p>
+<p>$$<br>
+\sum_{i=0}^n i^2 = \frac{(n^2+n)(2n+1)}{6}<br>
+$$</p>
 
       
     </div>
@@ -545,7 +648,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-06-13 15:22:21" itemprop="dateModified" datetime="2023-06-13T15:22:21+08:00">2023-06-13</time>
+      <time title="修改时间：2023-06-14 16:08:47" itemprop="dateModified" datetime="2023-06-14T16:08:47+08:00">2023-06-14</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -568,12 +671,12 @@
     
     <div class="post-body" itemprop="articleBody">
           <!-- @import "[TOC]" {cmd="toc" depthFrom=1 depthTo=6 orderedList=false} -->
-
 <!-- code_chunk_output -->
-
 <ul>
-<li><a href="#%E7%BC%96%E5%86%99markdown">编写markdown</a><ul>
-<li><a href="#%E8%AF%AD%E6%B3%95">语法</a><ul>
+<li><a href="#%E7%BC%96%E5%86%99markdown">编写markdown</a>
+<ul>
+<li><a href="#%E8%AF%AD%E6%B3%95">语法</a>
+<ul>
 <li><a href="#%E6%A0%87%E9%A2%98%E8%BF%99%E5%B0%B1%E6%98%AF">标题(这就是)</a></li>
 <li><a href="#%E5%BC%BA%E8%B0%83">强调</a></li>
 <li><a href="#%E5%88%97%E8%A1%A8">列表</a></li>
@@ -583,16 +686,19 @@
 <li><a href="#%E5%88%86%E5%89%B2%E7%BA%BF">分割线</a></li>
 <li><a href="#%E8%A1%8C%E5%86%85%E4%BB%A3%E7%A0%81">行内代码</a></li>
 <li><a href="#%E4%BB%A3%E7%A0%81%E5%9D%97">代码块</a></li>
-<li><a href="#toc">TOC</a><ul>
+<li><a href="#toc">TOC</a>
+<ul>
 <li><a href="#%E8%BF%99%E4%B8%AA%E6%B2%A1%E6%9C%89%E6%8E%92%E9%99%A4">这个没有排除</a></li>
 </ul>
 </li>
 <li><a href="#%E4%BB%BB%E5%8A%A1%E5%88%97%E8%A1%A8">任务列表</a></li>
 </ul>
 </li>
-<li><a href="#%E8%A1%A8%E6%A0%BC">表格</a><ul>
+<li><a href="#%E8%A1%A8%E6%A0%BC">表格</a>
+<ul>
 <li><a href="#emoji">Emoji</a></li>
-<li><a href="#%E6%A0%87%E8%AE%B0">标记</a><ul>
+<li><a href="#%E6%A0%87%E8%AE%B0">标记</a>
+<ul>
 <li><a href="#%E4%B8%8A%E6%A0%87">上标</a></li>
 <li><a href="#%E4%B8%8B%E6%A0%87">下标</a></li>
 <li><a href="#%E8%84%9A%E6%B3%A8">脚注</a></li>
@@ -609,27 +715,39 @@
 </li>
 </ul>
 <!-- /code_chunk_output -->
-
-
-
-<h1 id="编写markdown"><a href="#编写markdown" class="headerlink" title="编写markdown"></a>编写markdown</h1><p>由于本自建博客都是用markdown去写，所以想写篇教程使用 VS + Markdown Preview Enhanced 插件完成，这款插件旨在让你拥有飘逸的Markdown写作体验。</p>
-<h2 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h2><h3 id="标题-这就是"><a href="#标题-这就是" class="headerlink" title="标题(这就是)"></a>标题(这就是)</h3><h3 id="强调"><a href="#强调" class="headerlink" title="强调"></a>强调</h3><p>这是 <em>斜体字</em><br>这是 <strong>粗体</strong><br>这是 <strong>粗体</strong><br>这是 <strong><em>加粗斜体组合</em></strong><br>这是 <del>删除</del></p>
-<h3 id="列表"><a href="#列表" class="headerlink" title="列表"></a>列表</h3><ul>
-<li>编程语言<ul>
-<li>Java<ul>
-<li>对象<ul>
+<h1>编写markdown</h1>
+<p>由于本自建博客都是用markdown去写，所以想写篇教程使用 VS + Markdown Preview Enhanced 插件完成，这款插件旨在让你拥有飘逸的Markdown写作体验。</p>
+<h2 id="语法">语法</h2>
+<h3 id="标题-这就是">标题(这就是)</h3>
+<h3 id="强调">强调</h3>
+<p>这是 <em>斜体字</em><br>
+这是 <strong>粗体</strong><br>
+这是 <strong>粗体</strong><br>
+这是 <strong><em>加粗斜体组合</em></strong><br>
+这是 <s>删除</s></p>
+<h3 id="列表">列表</h3>
+<ul>
+<li>编程语言
+<ul>
+<li>Java
+<ul>
+<li>对象
+<ul>
 <li>Object</li>
 </ul>
 </li>
 </ul>
 </li>
-<li>Python<ul>
-<li>开发框架<ul>
+<li>Python
+<ul>
+<li>开发框架
+<ul>
 <li>flask</li>
 <li>Django</li>
 </ul>
 </li>
-<li>函数<ul>
+<li>函数
+<ul>
 <li>print</li>
 </ul>
 </li>
@@ -639,42 +757,51 @@
 </ul>
 </li>
 </ul>
-<h3 id="插入图片"><a href="#插入图片" class="headerlink" title="插入图片"></a>插入图片</h3><p><img src="/../imgs/1.jpg" alt="熊猫人表情"></p>
+<h3 id="插入图片">插入图片</h3>
+<p><img src="../imgs/1.jpg" alt="熊猫人表情"></p>
 <p>Ctrl+Shift+P 输入Image Helper， 可以选择Image Helper插入</p>
 <p><img src="https://i.imgur.com/Zmzo7CY.jpg" alt="飞书20221202-172006"></p>
-<h3 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h3><p><a href="https://prs1022.github.io/">财富密码</a></p>
-<h3 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h3><blockquote>
+<h3 id="链接">链接</h3>
+<p><a href="https://prs1022.github.io/">财富密码</a></p>
+<h3 id="引用">引用</h3>
+<blockquote>
 <p>人们真正注意到你的时候，不是第一眼看到你站在那里，而是发现过了这么久你居然还在那里。</p>
 </blockquote>
-<h3 id="分割线"><a href="#分割线" class="headerlink" title="分割线"></a>分割线</h3><hr>
-<p>我与上面切割了！ </p>
-<h3 id="行内代码"><a href="#行内代码" class="headerlink" title="行内代码"></a>行内代码</h3><p>用python打印一个helloworld怎么写？<br>是不是 <code>Print(&quot;hello world&quot;)</code> 才对。</p>
-<h3 id="代码块"><a href="#代码块" class="headerlink" title="代码块"></a>代码块</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">System.out.println(<span class="string">&quot;hello world&quot;</span>)</span><br></pre></td></tr></table></figure>
-
+<h3 id="分割线">分割线</h3>
+<hr>
+<p>我与上面切割了！</p>
+<h3 id="行内代码">行内代码</h3>
+<p>用python打印一个helloworld怎么写？<br>
+是不是 <code>Print(&quot;hello world&quot;)</code> 才对。</p>
+<h3 id="代码块">代码块</h3>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">System.out.println(<span class="string">&quot;hello world&quot;</span>)</span><br></pre></td></tr></table></figure>
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123;</span><br><span class="line">    <span class="string">&quot;fmt&quot;</span></span><br><span class="line">&#125;</span><br><span class="line">fmt.printf(<span class="string">&quot;hello world&quot;</span>)</span><br></pre></td></tr></table></figure>
-
 <p>显示代码行数</p>
 <figure class="highlight javascript"><figcaption><span>&#123;.line-numbers&#125;</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">add</span>(<span class="params">x,y</span>)&#123;</span><br><span class="line">    <span class="keyword">return</span> x+y</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p>高亮代码行</p>
 <figure class="highlight javascript"><figcaption><span>&#123;highlight</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> x=<span class="number">1</span>,y=<span class="number">2</span></span><br><span class="line">c = <span class="title function_">add</span>(x,y)</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(c)</span><br></pre></td></tr></table></figure>
-
-<h3 id="TOC"><a href="#TOC" class="headerlink" title="TOC"></a>TOC</h3><p>我喜欢这个功能，ctrl+shift+P打开命令面板 输入Create Toc，选择后就可以创建了。</p>
+<h3 id="TOC">TOC</h3>
+<p>我喜欢这个功能，ctrl+shift+P打开命令面板 输入Create Toc，选择后就可以创建了。</p>
 <p>并且它是可以根据你更改内容自动更新的。</p>
-<h4 id="这个是被排除的标题-ignore-x3D-true"><a href="#这个是被排除的标题-ignore-x3D-true" class="headerlink" title="这个是被排除的标题 {ignore&#x3D;true}"></a>这个是被排除的标题 {ignore&#x3D;true}</h4><h4 id="这个没有排除"><a href="#这个没有排除" class="headerlink" title="这个没有排除"></a>这个没有排除</h4><h3 id="任务列表"><a href="#任务列表" class="headerlink" title="任务列表"></a>任务列表</h3><ul>
-<li><input checked="" disabled="" type="checkbox"> 早饭吃了吗</li>
-<li><input checked="" disabled="" type="checkbox"> 中饭吃了吗</li>
-<li><input disabled="" type="checkbox"> 学习了吗</li>
-<li><input checked="" disabled="" type="checkbox"> 晚饭吃了吗</li>
+<h4 id="这个是被排除的标题-ignore-true">这个是被排除的标题 {ignore=true}</h4>
+<h4 id="这个没有排除">这个没有排除</h4>
+<h3 id="任务列表">任务列表</h3>
+<ul>
+<li>[x] 早饭吃了吗</li>
+<li>[x] 中饭吃了吗</li>
+<li>[ ] 学习了吗</li>
+<li>[x] 晚饭吃了吗</li>
 </ul>
-<h2 id="表格"><a href="#表格" class="headerlink" title="表格"></a>表格</h2><table>
+<h2 id="表格">表格</h2>
+<table>
 <thead>
 <tr>
 <th>First Header</th>
 <th>Second Header</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>Cell1</td>
 <td>Cell2</td>
 </tr>
@@ -682,7 +809,8 @@
 <td>Cell3</td>
 <td>Cell4</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
 <p>合并单元格 (需要在插件设置中打开 <strong>enableExtendedTableSyntax</strong> )</p>
 <ul>
 <li>行合并 (&gt; 或者 empty)</li>
@@ -697,7 +825,8 @@
 </thead>
 </table>
 <blockquote>
-<p>| Cell2<br>| Cell4</p>
+<p>| Cell2<br>
+| Cell4</p>
 </blockquote>
 <table>
 <thead>
@@ -706,7 +835,8 @@
 <th>Second Header</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>Cell1</td>
 <td>Cell2</td>
 </tr>
@@ -714,19 +844,44 @@
 <td>^</td>
 <td>Cell4</td>
 </tr>
-</tbody></table>
-<h3 id="Emoji"><a href="#Emoji" class="headerlink" title="Emoji"></a>Emoji</h3><p>:smile:<br>:fa-car:</p>
-<h3 id="标记"><a href="#标记" class="headerlink" title="标记"></a>标记</h3><h4 id="上标"><a href="#上标" class="headerlink" title="上标"></a>上标</h4><p>30^o^</p>
-<h4 id="下标"><a href="#下标" class="headerlink" title="下标"></a>下标</h4><p>H<del>2</del>O</p>
-<h4 id="脚注"><a href="#脚注" class="headerlink" title="脚注"></a>脚注</h4><p>Content [^1]</p>
-<p>[^1]: Hi! This is a footnote</p>
-<h4 id="缩略"><a href="#缩略" class="headerlink" title="缩略"></a>缩略</h4><p>*[HTML]: Hyper Text Markup Language<br>*[W3C]: World Wide Web Consortium<br>The HTML specification<br>is maintained by the W3C.</p>
-<h4 id="标记-1"><a href="#标记-1" class="headerlink" title="标记"></a>标记</h4><p>&#x3D;&#x3D;我被标记了&#x3D;&#x3D;</p>
-<h4 id="Admonition-告诫"><a href="#Admonition-告诫" class="headerlink" title="Admonition 告诫"></a>Admonition 告诫</h4><p>!!! note this is the 告诫标题<br>    这是告诫主体</p>
-<h4 id="数学"><a href="#数学" class="headerlink" title="数学"></a>数学</h4><p>行内数学表达式 $ x^3 + y^3 &#x3D; z^3 $</p>
-<p>块表达式<br>$$<br>\sum_{n&#x3D;1}^{100}n &#x3D;?<br>$$</p>
-<h2 id="相关主题"><a href="#相关主题" class="headerlink" title="相关主题"></a>相关主题</h2><p>在插件的设置中，我设置了预览的主题色和代码的背景色。整个设置内容非常多。详细的<a target="_blank" rel="noopener" href="https://shd101wyy.github.io/markdown-preview-enhanced/#/zh-cn/markdown-basics">参考</a>。</p>
+</tbody>
+</table>
+<h3 id="Emoji">Emoji</h3>
+<p>😄<br>
+🚗<br>
+😘<br>
+😍</p>
+<h3 id="标记">标记</h3>
+<h4 id="上标">上标</h4>
+<p>30<sup>o</sup></p>
+<h4 id="下标">下标</h4>
+<p>H<sub>2</sub>O</p>
+<h4 id="脚注">脚注</h4>
+<p>Content <sup class="footnote-ref"><a href="#fn1" id="fnref1">[1]</a></sup></p>
+<h4 id="缩略">缩略</h4>
+<p>The <abbr title="Hyper Text Markup Language">HTML</abbr> specification<br>
+is maintained by the <abbr title="World Wide Web Consortium">W3C</abbr>.</p>
+<h4 id="标记-v2">标记</h4>
+<p>==我被标记了==</p>
+<h4 id="Admonition-告诫">Admonition 告诫</h4>
+<p>!!! note this is the 告诫标题<br>
+这是告诫主体</p>
+<h4 id="数学">数学</h4>
+<p>行内数学表达式 $ x^3 + y^3 = z^3 $</p>
+<p>块表达式<br>
+$$<br>
+\sum_{n=1}^{100}n =?<br>
+$$</p>
+<h2 id="相关主题">相关主题</h2>
+<p>在插件的设置中，我设置了预览的主题色和代码的背景色。整个设置内容非常多。详细的<a target="_blank" rel="noopener" href="https://shd101wyy.github.io/markdown-preview-enhanced/#/zh-cn/markdown-basics">参考</a>。</p>
 <p>写完发现有些不能在github page上正确解析呀， 数学公式不能展示有点遗憾。</p>
+<hr class="footnotes-sep">
+<section class="footnotes">
+<ol class="footnotes-list">
+<li id="fn1" class="footnote-item"><p>Hi! This is a footnote <a href="#fnref1" class="footnote-backref">↩︎</a></p>
+</li>
+</ol>
+</section>
 
       
     </div>
@@ -811,10 +966,15 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h1 id="go语言"><a href="#go语言" class="headerlink" title="go语言"></a>go语言</h1><h2 id="项目背景"><a href="#项目背景" class="headerlink" title="项目背景"></a>项目背景</h2><p>之前一个同事写的一个项目使用的是go语言, 用go语言做后端，前端是一个简单的html表单页面，表单内容有，并发数、最大query数，测试链接地址（飞书在线文档地址excel表格）。这个充当了我们的回归测试工具，在每次发布前需要跑一下这个测试。看看准确率有没有下降。</p>
-<h2 id="为啥要用go"><a href="#为啥要用go" class="headerlink" title="为啥要用go"></a>为啥要用go</h2><p>我觉得主要是用go写并发 比java方便，因为</p>
-<h2 id="基础语法怎么学"><a href="#基础语法怎么学" class="headerlink" title="基础语法怎么学"></a>基础语法怎么学</h2><p>首先我是直接看的项目，没有像掌握一门语言那样从头开始看起。遇到不懂的写法就问gpt，很快就能读懂这个代码，并作出想要的修改。</p>
-<h2 id="使用go的感受"><a href="#使用go的感受" class="headerlink" title="使用go的感受"></a>使用go的感受</h2>
+          <h1>go语言</h1>
+<h2 id="项目背景">项目背景</h2>
+<p>之前一个同事写的一个项目使用的是go语言, 用go语言做后端，前端是一个简单的html表单页面，表单内容有，并发数、最大query数，测试链接地址（飞书在线文档地址excel表格）。这个充当了我们的回归测试工具，在每次发布前需要跑一下这个测试。看看准确率有没有下降。</p>
+<h2 id="为啥要用go">为啥要用go</h2>
+<p>我觉得主要是用go写并发 比java方便，因为</p>
+<h2 id="基础语法怎么学">基础语法怎么学</h2>
+<p>首先我是直接看的项目，没有像掌握一门语言那样从头开始看起。遇到不懂的写法就问gpt，很快就能读懂这个代码，并作出想要的修改。</p>
+<h2 id="使用go的感受">使用go的感受</h2>
+
       
     </div>
 
@@ -898,36 +1058,41 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h1 id="chatgpt"><a href="#chatgpt" class="headerlink" title="chatgpt"></a>chatgpt</h1><ul>
+          <h1>chatgpt</h1>
+<ul>
 <li>web地址: <a target="_blank" rel="noopener" href="https://chat.openai.com/">https://chat.openai.com/</a> 需要科学上网，早期可以注册，现在不行了</li>
 <li>flowgpt: 现在科学上网可以注册，免费，每天登陆可以claim 25 积分，每次chat消耗积分</li>
-<li><a target="_blank" rel="noopener" href="https://www.aihunt.one/">AIhunt导航</a> 是一个不错的导航站， 里面有很多资源</li>
+<li><a target="_blank" rel="noopener" href="https://www.aihunt.one">AIhunt导航</a> 是一个不错的导航站， 里面有很多资源</li>
 <li><a target="_blank" rel="noopener" href="http://tools.jb51.net/">在线小工具</a></li>
 <li><a target="_blank" rel="noopener" href="https://lks.cc/">有趣的网站</a></li>
 </ul>
-<h2 id="prompt"><a href="#prompt" class="headerlink" title="prompt"></a>prompt</h2><p>在用gpt的时候，prompt提示词很关键，上面的flowgpt就是专门为提示词做的一个社区项目，创始人就是想把大家的idea集中起来，做各种各样的template，大家互相分享交流学习。</p>
-<p>还有这样的网站<a target="_blank" rel="noopener" href="https://prompts.chat/">Awesome提示词</a>，里面有个很有意思的prompt，<br><strong>Act as a Python interpreter</strong></p>
+<h2 id="prompt">prompt</h2>
+<p>在用gpt的时候，prompt提示词很关键，上面的flowgpt就是专门为提示词做的一个社区项目，创始人就是想把大家的idea集中起来，做各种各样的template，大家互相分享交流学习。</p>
+<p>还有这样的网站<a target="_blank" rel="noopener" href="https://prompts.chat/">Awesome提示词</a>，里面有个很有意思的prompt，<br>
+<strong>Act as a Python interpreter</strong></p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">I want you to act like a Python interpreter. I will give you Python code, and you will execute it. Do not provide any explanations. Do not respond with anything except the output of the code. The first code is: “print(‘hello world!’)”</span><br></pre></td></tr></table></figure>
-
 <p>接下来输入给gpt的就是各种各样的python代码，gpt会给出相应的输出结果，我试了一下结果很正确，然后让它切换到java编译器，在网上找了一些枯燥晦涩的java笔试题喂给他， 他第一道居然就答错了。 anyway， 在我们告诉他 <strong>you are wrong</strong>后，很快啊，它又generate了一段回复，这回它对了。</p>
 <p>尽管它有时候第一次不能完美回答，但是它的出现给了我们很多idea，以前从未有过的， 就拿这层出不穷的prompt来说，确实集思广益了。有句话拿出来跟大家分享，<strong>有时候会问问题比知道答案更重要</strong>， 在gpt身上体现的淋漓尽致， 有时候不是它回答的不是我们想要的，而是我们问的不够好 不够完善。</p>
-<h2 id="template"><a href="#template" class="headerlink" title="template"></a>template</h2><p>我在flowgpt中建立了两个flow，可以看作就是模板吧。</p>
+<h2 id="template">template</h2>
+<p>我在flowgpt中建立了两个flow，可以看作就是模板吧。</p>
 <p>我当时的需求是想用gpt给我生成一些语料 corpus</p>
 <p>在NLP算法开发之前有大量的时间是需要标注语料的，当然有专门的digital marker来做这件事。也有一些工具可以做，但是最好的还是人工标注，以应对复杂的语言环境，反问啊，疑问啊，还有一些摸棱两可的句子，总之很复杂就是了。 但是简短的一些语义的泛化其实就有迹可循了。</p>
 <p>例如我们要问 <strong>明天上海的天气怎么样?</strong></p>
-<p>一般的泛化说法就是 </p>
+<p>一般的泛化说法就是</p>
 <ol>
-<li>加前缀助词 帮我看看….</li>
+<li>加前缀助词 帮我看看…</li>
 <li>加尾缀词 …你知道吗</li>
 <li>同义词的替换 明天换成明日，上海换成魔都等等</li>
-<li>语句的倒装，天气怎么样在明天的上海。。这个例子可能不是特别好。。。。 </li>
+<li>语句的倒装，天气怎么样在明天的上海。。这个例子可能不是特别好。。。。</li>
 <li>中间加上一些词，不重要的。说不重要指的是不是实体词，或者准确点说是天气这个垂域不需要关心的实体词。</li>
 </ol>
 <p>ok， 以上是我能想到的一些泛化说法了， 至于还有其他的让我来问gpt吧，因为规则都是人事先想好的，就像正则一样，只能产生规则内的一些说法，超出规则外的一些是我人脑短时间难以考虑到的。</p>
 <p>ok，看看我在flowgpt建立的模板吧</p>
 <figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">我给你一个语料标注模版，例如，“请给我查一下上海下周一到下周三的天气”，标注结果为“请给我查一下[上海](poi)[下周一到下周三](time)的天气”。现在我给你一批语料，帮我按照这个规则去生成标注后的结果。</span><br></pre></td></tr></table></figure>
-<p>这里给出的一个模板就是我上面陈述的，但是又不止于天气，其实我可以问导航、电话、系统设置等方面的句子。<br>这里的标注只限于实体词的抽取了，NLU还有一步是要区分这个句子的意图 intent，也就是个分类模型， 这个也可以用gpt帮忙去做。</p>
-<h2 id="Learn-English"><a href="#Learn-English" class="headerlink" title="Learn English"></a>Learn English</h2><p>有时候需要找一个人练习英语，口语的条件有点难得，但是文字的回复我们可以有啊，跟gpt学英语是再好不过的了。</p>
+<p>这里给出的一个模板就是我上面陈述的，但是又不止于天气，其实我可以问导航、电话、系统设置等方面的句子。<br>
+这里的标注只限于实体词的抽取了，NLU还有一步是要区分这个句子的意图 intent，也就是个分类模型， 这个也可以用gpt帮忙去做。</p>
+<h2 id="Learn-English">Learn English</h2>
+<p>有时候需要找一个人练习英语，口语的条件有点难得，但是文字的回复我们可以有啊，跟gpt学英语是再好不过的了。</p>
 <p>ok， 就更新到这里吧，以后想起来继续写。</p>
 <blockquote>
 <blockquote>

@@ -19,12 +19,12 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"prs1022.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.17.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"utterances","storage":true,"lazyload":false,"nav":null,"activeClass":"utterances"},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="go语言项目背景之前一个同事写的一个项目使用的是go语言, 用go语言做后端，前端是一个简单的html表单页面，表单内容有，并发数、最大query数，测试链接地址（飞书在线文档地址excel表格）。这个充当了我们的回归测试工具，在每次发布前需要跑一下这个测试。看看准确率有没有下降。 为啥要用go我觉得主要是用go写并发 比java方便，因为 基础语法怎么学首先我是直接看的项目，没有像掌握一门语言那">
+    <meta name="description" content="go语言 项目背景 之前一个同事写的一个项目使用的是go语言, 用go语言做后端，前端是一个简单的html表单页面，表单内容有，并发数、最大query数，测试链接地址（飞书在线文档地址excel表格）。这个充当了我们的回归测试工具，在每次发布前需要跑一下这个测试。看看准确率有没有下降。 为啥要用go 我觉得主要是用go写并发 比java方便，因为 基础语法怎么学 首先我是直接看的项目，没有像掌握一">
 <meta property="og:type" content="article">
 <meta property="og:title" content="go语言学习">
 <meta property="og:url" content="https://prs1022.github.io/2023/06/02/go%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0/index.html">
 <meta property="og:site_name" content="song&#39;s blog">
-<meta property="og:description" content="go语言项目背景之前一个同事写的一个项目使用的是go语言, 用go语言做后端，前端是一个简单的html表单页面，表单内容有，并发数、最大query数，测试链接地址（飞书在线文档地址excel表格）。这个充当了我们的回归测试工具，在每次发布前需要跑一下这个测试。看看准确率有没有下降。 为啥要用go我觉得主要是用go写并发 比java方便，因为 基础语法怎么学首先我是直接看的项目，没有像掌握一门语言那">
+<meta property="og:description" content="go语言 项目背景 之前一个同事写的一个项目使用的是go语言, 用go语言做后端，前端是一个简单的html表单页面，表单内容有，并发数、最大query数，测试链接地址（飞书在线文档地址excel表格）。这个充当了我们的回归测试工具，在每次发布前需要跑一下这个测试。看看准确率有没有下降。 为啥要用go 我觉得主要是用go写并发 比java方便，因为 基础语法怎么学 首先我是直接看的项目，没有像掌握一">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-06-02T08:54:10.000Z">
 <meta property="article:modified_time" content="2023-06-13T07:22:21.877Z">
@@ -107,7 +107,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#go%E8%AF%AD%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">go语言</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A1%B9%E7%9B%AE%E8%83%8C%E6%99%AF"><span class="nav-number">1.1.</span> <span class="nav-text">项目背景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%BA%E5%95%A5%E8%A6%81%E7%94%A8go"><span class="nav-number">1.2.</span> <span class="nav-text">为啥要用go</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95%E6%80%8E%E4%B9%88%E5%AD%A6"><span class="nav-number">1.3.</span> <span class="nav-text">基础语法怎么学</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8go%E7%9A%84%E6%84%9F%E5%8F%97"><span class="nav-number">1.4.</span> <span class="nav-text">使用go的感受</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">go语言</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A1%B9%E7%9B%AE%E8%83%8C%E6%99%AF"><span class="nav-number">1.1.</span> <span class="nav-text">项目背景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%BA%E5%95%A5%E8%A6%81%E7%94%A8go"><span class="nav-number">1.2.</span> <span class="nav-text">为啥要用go</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95%E6%80%8E%E4%B9%88%E5%AD%A6"><span class="nav-number">1.3.</span> <span class="nav-text">基础语法怎么学</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8go%E7%9A%84%E6%84%9F%E5%8F%97"><span class="nav-number">1.4.</span> <span class="nav-text">使用go的感受</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -223,10 +223,15 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><h1 id="go语言"><a href="#go语言" class="headerlink" title="go语言"></a>go语言</h1><h2 id="项目背景"><a href="#项目背景" class="headerlink" title="项目背景"></a>项目背景</h2><p>之前一个同事写的一个项目使用的是go语言, 用go语言做后端，前端是一个简单的html表单页面，表单内容有，并发数、最大query数，测试链接地址（飞书在线文档地址excel表格）。这个充当了我们的回归测试工具，在每次发布前需要跑一下这个测试。看看准确率有没有下降。</p>
-<h2 id="为啥要用go"><a href="#为啥要用go" class="headerlink" title="为啥要用go"></a>为啥要用go</h2><p>我觉得主要是用go写并发 比java方便，因为</p>
-<h2 id="基础语法怎么学"><a href="#基础语法怎么学" class="headerlink" title="基础语法怎么学"></a>基础语法怎么学</h2><p>首先我是直接看的项目，没有像掌握一门语言那样从头开始看起。遇到不懂的写法就问gpt，很快就能读懂这个代码，并作出想要的修改。</p>
-<h2 id="使用go的感受"><a href="#使用go的感受" class="headerlink" title="使用go的感受"></a>使用go的感受</h2>
+    <div class="post-body" itemprop="articleBody"><h1>go语言</h1>
+<h2 id="项目背景">项目背景</h2>
+<p>之前一个同事写的一个项目使用的是go语言, 用go语言做后端，前端是一个简单的html表单页面，表单内容有，并发数、最大query数，测试链接地址（飞书在线文档地址excel表格）。这个充当了我们的回归测试工具，在每次发布前需要跑一下这个测试。看看准确率有没有下降。</p>
+<h2 id="为啥要用go">为啥要用go</h2>
+<p>我觉得主要是用go写并发 比java方便，因为</p>
+<h2 id="基础语法怎么学">基础语法怎么学</h2>
+<p>首先我是直接看的项目，没有像掌握一门语言那样从头开始看起。遇到不懂的写法就问gpt，很快就能读懂这个代码，并作出想要的修改。</p>
+<h2 id="使用go的感受">使用go的感受</h2>
+
     </div>
 
     
